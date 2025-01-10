@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yodelin Broth Company & Beer Garden | Leavenworth, WA</title>
+    <meta name="description"
+        content="Stylish, rustic joint with mountain views offering bone broth soups, salads, burgers, and craft beer in Leavenworth, WA.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Yodelin<span class="logo-accent">.</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Story</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#beer-garden">Beer Garden</a></li>
+                <li><a href="#visit">Visit</a></li>
+                <li><a href="https://www.toasttab.com" target="_blank" class="btn-primary small">Order Online</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-content">
+            <h1 class="fade-in">Broth. Beer. <br>Mountain Views.</h1>
+            <p class="fade-in delay-1">The soul of Leavenworth in a bowl.</p>
+            <div class="hero-btns fade-in delay-2">
+                <a href="#menu" class="btn-primary">View Menu</a>
+                <a href="#visit" class="btn-secondary">Get Directions</a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <section id="about" class="about-section">
+        <div class="container split-layout">
+            <div class="about-text" data-scroll>
+                <h2>A Rustic Escape</h2>
+                <div class="divider"></div>
+                <p>Located on Front Street, Yodelin Broth Company offers a unique dining experience. We believe in food
+                    that heals and warms the soul. From our signature bone broths to our gourmet burgers, everything is
+                    crafted with love and fresh, local ingredients.</p>
+                <p>Whether you're finishing a hike or just exploring the town, our beer garden offers the perfect spot
+                    to relax with a craft brew and soak in the stunning mountain vistas.</p>
+            </div>
+            <div class="about-image" data-scroll>
+                <!-- Placeholder for an interior shot if we had more, using hero fallback or distinct one -->
+                <div class="image-card">
+                    <img src="assets/broth_bowl.png" alt="Signature Bone Broth">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Menu Highlights</h2>
+                <p>Wholesome flavors, no shortcuts.</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-item" data-scroll>
+                    <div class="menu-img">
+                        <img src="assets/broth_bowl.png" alt="Bone Broth">
+                    </div>
+                    <div class="menu-info">
+                        <h3>Signature Bone Broth</h3>
+                        <p>Slow-simmered for 24 hours. Rich, collagen-packed, and deeply restorative.</p>
+                        <span class="price">$12</span>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-scroll>
+                    <div class="menu-img">
+                        <img src="assets/burger.png" alt="Gourmet Burger">
+                    </div>
+                    <div class="menu-info">
+                        <h3>The Yodelin Burger</h3>
+                        <p>Grass-fed beef, aged cheddar, caramelized onions, and house sauce.</p>
+                        <span class="price">$18</span>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-scroll>
+                    <div class="menu-img">
+                        <div class="placeholder-img"
+                            style="background-color: #2c3e50; height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; color: #fff;">
+                            <span>Fresh Salads</span></div>
+                    </div>
+                    <div class="menu-info">
+                        <h3>Alpine Salad</h3>
+                        <p>Mixed greens, roasted beets, goat cheese, walnuts, and balsamic glaze.</p>
+                        <span class="price">$14</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#" class="btn-outline">View Full Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="beer-garden" class="beer-section">
+        <div class="container">
+            <div class="beer-content split-layout reverse">
+                <div class="beer-text" data-scroll>
+                    <h2>The Beer Garden</h2>
+                    <div class="divider"></div>
+                    <p>Our rotating taps feature the best of the Pacific Northwest. From hoppy IPAs to rich Stouts, we
+                        have the perfect pour to complement your meal.</p>
+                    <ul class="beer-features">
+                        <li><i class="fa-solid fa-check"></i> Local Craft Breweries</li>
+                        <li><i class="fa-solid fa-check"></i> Seasonal Rotations</li>
+                        <li><i class="fa-solid fa-check"></i> Dog Friendly Patio</li>
+                    </ul>
+                    <a href="#" class="btn-primary">See Current Tap List</a>
+                </div>
+                <div class="beer-image" data-scroll>
+                    <img src="assets/beer_taps.png" alt="Craft Beer Taps">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="visit" class="visit-section">
+        <div class="container">
+            <div class="visit-card">
+                <div class="contact-info">
+                    <h2>Visit Us</h2>
+                    <p><i class="fa-solid fa-location-dot"></i> 633 Front St #1346, Leavenworth, WA 98826</p>
+                    <p><i class="fa-solid fa-phone"></i> +1 509-888-4555</p>
+                    <p><i class="fa-regular fa-envelope"></i> hello@yodelinbroth.com</p>
+
+                    <div class="hours">
+                        <h3>Hours</h3>
+                        <p><span>Mon - Thu:</span> 11:00 AM - 9:00 PM</p>
+                        <p><span>Fri - Sun:</span> 11:00 AM - 10:00 PM</p>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <!-- Google Maps Iframe Placeholder -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2683.568434680879!2d-120.66358468436528!3d47.59599557918424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x549a4d7000000001%3A0x0!2zNDfCsDM1JzQ1LjYiTiAxMjDCsDM5JzQxLjAiVw!5e0!3m2!1sen!2sus!4v1634567890123!5m2!1sen!2sus"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2025 Yodelin Broth Company. All rights reserved.</p>
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-widget">
+        <div class="chat-toggle" id="chat-toggle">
+            <i class="fa-regular fa-comments"></i>
+        </div>
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>Yodelin Assistant</span>
+                </div>
+                <button id="chat-close" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will appear here -->
+                <div class="message bot">
+                    <div class="text">Hello! Welcome to Yodelin Broth Company. How can I help you today? Ask me about
+                        our menu, hours, or beer list!</div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
