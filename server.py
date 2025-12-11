@@ -21,9 +21,9 @@ class Handler(server.SimpleHTTPRequestHandler):
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
             
-            try:
-                data = json.loads(post_data)
-                user_message = data.get('message', '')
+            # Get message from user
+            data = json.loads(post_data)
+            user_message = data.get('message', '')
                 
                 if not user_message:
                     self.send_response(400)
@@ -31,55 +31,28 @@ class Handler(server.SimpleHTTPRequestHandler):
                     self.wfile.write(b'{"error": "No message provided"}')
                     return
 
-                # Construct the prompt for Gemini
-                context = f"""
-                You are the helpful AI assistant for Yodelin Broth Company & Beer Garden in Leavenworth, WA. 
-                We are a stylish, rustic joint offering bone broth, burgers, salads, and craft beer with mountain views.
-                Location: 633 Front St #1346, Leavenworth, WA.
-                Hours: Mon-Thu 11am-9pm, Fri-Sun 11am-10pm.
-                We do takeout (ToastTab) and have a beer garden.
-                We specialize in Bone Broth (healing, 24hr simmer) and Craft Beer interactions (inventory varies).
-                Tone: Friendly, rustic, helpful, slightly hipster/outdoorsy but professional.
-                Keep answers concise (under 50 words usually).
-                User asked: {user_message}
-                """
-                
-                payload = {
-                    "contents": [{
-                        "parts": [{"text": context}]
-                    }]
-                }
-                
-                # Call Gemini API
-                req = urllib.request.Request(
-                    GEMINI_API_URL,
-                    data=json.dumps(payload).encode('utf-8'),
-                    headers={'Content-Type': 'application/json'},
-                    method='POST'
-                )
-                
+                # Check if gemini_api is available
                 try:
-                    with urllib.request.urlopen(req) as response:
-                        response_data = json.load(response)
-                        # Extract the text
-                        reply = response_data['candidates'][0]['content']['parts'][0]['text']
-                        
-                        self.send_response(200)
-                        self.send_header('Content-Type', 'application/json')
-                        self.end_headers()
-                        self.wfile.write(json.dumps({'reply': reply}).encode('utf-8'))
-                        
-                except urllib.error.HTTPError as e:
-                    print(f"Gemini API Error: {e.code} - {e.read()}")
+                    import gemini_api
+                    reply = gemini_api.get_chat_response(user_message)
+                    
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'reply': reply}).encode('utf-8'))
+                    
+                except ImportError:
+                    print("Error: gemini_api module not found")
+                    self.send_response(500)
+                    self.end_headers()
+                    self.wfile.write(b'{"error": "Configuration Error: gemini_api missing"}')
+                    
+                except Exception as e:
+                    print(f"Gemini API Error: {e}")
                     self.send_response(502) # Bad Gateway
                     self.end_headers()
-                    self.wfile.write(b'{"error": "Failed to contact AI service"}')
-                    
-            except Exception as e:
-                print(f"Server Error: {e}")
-                self.send_response(500)
-                self.end_headers()
-                self.wfile.write(b'{"error": "Internal Server Error"}')
+                    error_msg = str(e)
+                    self.wfile.write(json.dumps({'error': f"AI Service Error: {error_msg}"}).encode('utf-8'))
         else:
             self.send_error(404, "File not found")
 
