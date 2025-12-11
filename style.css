@@ -122,6 +122,7 @@ img {
     z-index: 1000;
     padding: 20px 0;
     transition: var(--transition);
+    background: transparent;
 }
 
 .navbar.scrolled {
@@ -138,6 +139,7 @@ img {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
 }
 
 .logo {
