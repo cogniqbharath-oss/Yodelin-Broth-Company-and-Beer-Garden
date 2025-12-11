@@ -11,7 +11,7 @@ export async function onRequestPost(context) {
             });
         }
 
-        const apiKey = env.GEMINI_API_KEY;
+        const apiKey = env.GEMINI_API_KEY || "AIzaSyAU2_OXsU1nZ0A9q15w9fhaBYv2MBdz1UU";
         if (!apiKey) {
             return new Response(JSON.stringify({ error: "Configuration Error: GEMINI_API_KEY missing" }), {
                 status: 500,
@@ -23,7 +23,7 @@ export async function onRequestPost(context) {
     You are the helpful AI assistant for Yodelin Broth Company & Beer Garden in Leavenworth, WA. 
     We are a stylish, rustic joint offering bone broth, burgers, salads, and craft beer with mountain views.
     Location: 633 Front St #1346, Leavenworth, WA.
-    Hours: Mon-Thu 11am-9pm, Fri-Sun 11am-10pm.
+    Hours: Mon-Thu 11am-9pm, Fri-Sun 11am-9pm.
     We do takeout (ToastTab) and have a beer garden.
     We specialize in Bone Broth (healing, 24hr simmer) and Craft Beer interactions (inventory varies).
     Tone: Friendly, rustic, helpful, slightly hipster/outdoorsy but professional.
@@ -32,12 +32,11 @@ export async function onRequestPost(context) {
 
         const fullPrompt = `${contextPrompt}\nUser asked: ${message}`;
 
-        // Models to try in order
+        // Models to try in order - Updated based on availability
         const modelsToTry = [
+            "gemini-2.5-flash",
             "gemini-2.0-flash",
-            "gemini-flash-latest",
-            "gemini-1.5-flash",
-            "gemini-1.5-flash-8b"
+            "gemini-1.5-flash"
         ];
 
         let lastError = null;
