@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // API KEY CONFIGURATION
-    // WARNING: Exposing API keys in client-side code is not recommended for production.
-    // This is for demonstration purposes only as requested.
-    const GEMINI_API_KEY = "AIzaSyCUi7cEhlg_VDnKAd9yQuZgn1b7VebB4RA";
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite-preview-02-05:generateContent?key=${GEMINI_API_KEY}`;
+    // Logic moved to server.py for security.
 
     // --- UI Interactions ---
 
@@ -110,45 +107,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (el) el.remove();
     }
 
-    // Gemini API Call
+    // Gemini API Call (Via Backend)
     async function fetchGeminiResponse(userMessage) {
-        // System prompt context
-        const context = `
-            You are the helpful AI assistant for Yodelin Broth Company & Beer Garden in Leavenworth, WA. 
-            We are a stylish, rustic joint offering bone broth, burgers, salads, and craft beer with mountain views.
-            Location: 633 Front St #1346, Leavenworth, WA.
-            Hours: Mon-Thu 11am-9pm, Fri-Sun 11am-10pm.
-            We do takeout (ToastTab) and have a beer garden.
-            We specialize in Bone Broth (healing, 24hr simmer) and Craft Beer interactions (inventory varies).
-            Tone: Friendly, rustic, helpful, slightly hipster/outdoorsy but professional.
-            Keep answers concise (under 50 words usually).
-            User asked: ${userMessage}
-        `;
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userMessage })
+            });
 
-        const payload = {
-            contents: [{
-                parts: [{
-                    text: context
-                }]
-            }]
-        };
+            if (!response.ok) {
+                throw new Error(`Server Error: ${response.statusText}`);
+            }
 
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-            throw new Error(`API Error: ${response.statusText}`);
+            const data = await response.json();
+            return data.reply || "I didn't catch that.";
+        } catch (error) {
+            console.error('Chat Error:', error);
+            throw error;
         }
-
-        const data = await response.json();
-        // Extract text from Gemini response structure
-        // Usually: candidates[0].content.parts[0].text
-        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "I didn't catch that.";
-        return reply;
     }
 });
