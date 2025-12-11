@@ -32,14 +32,16 @@ export async function onRequestPost(context) {
 
         const fullPrompt = `${contextPrompt}\nUser asked: ${message}`;
 
-        // Models to try in order - Updated based on availability
+        // Models to try in order
         const modelsToTry = [
             "gemini-2.5-flash",
             "gemini-2.0-flash",
-            "gemini-1.5-flash"
+            "gemini-1.5-flash",
+            "gemini-1.5-pro",
+            "gemini-pro"
         ];
 
-        let lastError = null;
+        let errors = [];
 
         for (const model of modelsToTry) {
             try {
@@ -59,6 +61,10 @@ export async function onRequestPost(context) {
                 }
 
                 const data = await response.json();
+                // Check if candidate exists
+                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                    throw new Error(`Model ${model} returned no candidates: ${JSON.stringify(data)}`);
+                }
                 const reply = data.candidates[0].content.parts[0].text;
 
                 return new Response(JSON.stringify({ reply }), {
@@ -67,12 +73,12 @@ export async function onRequestPost(context) {
 
             } catch (error) {
                 console.error(error);
-                lastError = error;
+                errors.push(error.message);
                 // Continue to next model
             }
         }
 
-        throw lastError || new Error("All models failed");
+        throw new Error("All models failed. Details: " + errors.join("; "));
 
     } catch (error) {
         return new Response(JSON.stringify({ error: `AI Service Error: ${error.message}` }), {
