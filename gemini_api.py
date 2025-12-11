@@ -2,7 +2,7 @@ import google.generativeai as genai
 import os
 
 # Configure the API key
-GEMINI_API_KEY = "AIzaSyAU2_OXsU1nZ0A9q15w9fhaBYv2MBdz1UU"
+GEMINI_API_KEY = "AIzaSyDErzB03TSMPa5GodQj5ahGAIrzacJWefo"
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Initialize the models to try in order

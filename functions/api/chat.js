@@ -11,7 +11,7 @@ export async function onRequestPost(context) {
             });
         }
 
-        const apiKey = env.GEMINI_API_KEY;
+        const apiKey = env.GEMINI_API_KEY || "AIzaSyDErzB03TSMPa5GodQj5ahGAIrzacJWefo";
         if (!apiKey) {
             return new Response(JSON.stringify({ error: "Configuration Error: GEMINI_API_KEY missing" }), {
                 status: 500,
