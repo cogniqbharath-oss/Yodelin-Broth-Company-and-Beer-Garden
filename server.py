@@ -25,34 +25,34 @@ class Handler(server.SimpleHTTPRequestHandler):
             data = json.loads(post_data)
             user_message = data.get('message', '')
                 
-                if not user_message:
-                    self.send_response(400)
-                    self.end_headers()
-                    self.wfile.write(b'{"error": "No message provided"}')
-                    return
+            if not user_message:
+                self.send_response(400)
+                self.end_headers()
+                self.wfile.write(b'{"error": "No message provided"}')
+                return
 
-                # Check if gemini_api is available
-                try:
-                    import gemini_api
-                    reply = gemini_api.get_chat_response(user_message)
-                    
-                    self.send_response(200)
-                    self.send_header('Content-Type', 'application/json')
-                    self.end_headers()
-                    self.wfile.write(json.dumps({'reply': reply}).encode('utf-8'))
-                    
-                except ImportError:
-                    print("Error: gemini_api module not found")
-                    self.send_response(500)
-                    self.end_headers()
-                    self.wfile.write(b'{"error": "Configuration Error: gemini_api missing"}')
-                    
-                except Exception as e:
-                    print(f"Gemini API Error: {e}")
-                    self.send_response(502) # Bad Gateway
-                    self.end_headers()
-                    error_msg = str(e)
-                    self.wfile.write(json.dumps({'error': f"AI Service Error: {error_msg}"}).encode('utf-8'))
+            # Check if gemini_api is available
+            try:
+                import gemini_api
+                reply = gemini_api.get_chat_response(user_message)
+                
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({'reply': reply}).encode('utf-8'))
+                
+            except ImportError:
+                print("Error: gemini_api module not found")
+                self.send_response(500)
+                self.end_headers()
+                self.wfile.write(b'{"error": "Configuration Error: gemini_api missing"}')
+                
+            except Exception as e:
+                print(f"Gemini API Error: {e}")
+                self.send_response(502) # Bad Gateway
+                self.end_headers()
+                error_msg = str(e)
+                self.wfile.write(json.dumps({'error': f"AI Service Error: {error_msg}"}).encode('utf-8'))
         else:
             self.send_error(404, "File not found")
 
