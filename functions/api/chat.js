@@ -1,5 +1,6 @@
 export async function onRequestPost(context) {
     try {
+        // Force rebuild comment
         const { request, env } = context;
         const { message } = await request.json();
 
