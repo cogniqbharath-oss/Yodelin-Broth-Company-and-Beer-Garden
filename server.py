@@ -7,7 +7,7 @@ import urllib.error
 
 PORT = 8000
 # IMPORTANT: Replace the placeholder below with your actual Google Gemini API key
-GEMINI_API_KEY = "AIzaSyDErzB03TSMPa5GodQj5ahGAIrzacJWefo"
+GEMINI_API_KEY = "AIzaSyACUjM36w85mXMRZ7UOspNtzbAIzba20Rg"
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
 
 class Handler(server.SimpleHTTPRequestHandler):
