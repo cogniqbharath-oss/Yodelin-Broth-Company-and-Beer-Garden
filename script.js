@@ -19,10 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelector('.nav-links');
 
     hamburger.addEventListener('click', () => {
-        // Simple toggle for demo; in production would add class to show/hide
-        // For now, let's just log or do a simple alert if we don't have CSS for it
-        // Actually, let's add a class and style it if we had time, but for now focus on chatbot
-        console.log('Mobile menu toggled');
+        navLinks.classList.toggle('active');
+        // Animate hamburger (optional simple toggle)
+        hamburger.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+        });
     });
 
     // Smooth Scroll for Anchors
