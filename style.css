@@ -170,7 +170,14 @@ img {
     color: var(--accent-gold);
 }
 
+/* Global small button style */
+.btn-primary.small {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+}
+
 .nav-links .btn-primary.small {
+    /* Kept for specificity if needed, but the global one covers it */
     padding: 8px 20px;
     font-size: 0.85rem;
 }
@@ -741,6 +748,13 @@ footer {
 
     .nav-links li {
         margin: 20px 0;
+    }
+
+    /* Resize Order Online Button on Mobile */
+    .nav-container .btn-primary.small {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+        margin-right: 10px;
     }
 
     /* Hero Buttons Mobile */
